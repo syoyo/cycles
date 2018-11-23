@@ -98,6 +98,7 @@ include(configure_build)
 include_directories(
 	third_party/cuew/include
 	third_party/clew/include
+	third_party/pugixml/
 )
 
 ###########################################################################

@@ -10,17 +10,17 @@ endif()
 ###########################################################################
 # GLUT
 
-if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)
-	set(GLUT_ROOT_PATH ${CYCLES_GLUT})
-
-	find_package(GLUT)
-	message(STATUS "GLUT_FOUND=${GLUT_FOUND}")
-
-	include_directories(
-		SYSTEM
-		${GLUT_INCLUDE_DIR}
-	)
-endif()
+#if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)
+#	set(GLUT_ROOT_PATH ${CYCLES_GLUT})
+#
+#	find_package(GLUT)
+#	message(STATUS "GLUT_FOUND=${GLUT_FOUND}")
+#
+#	include_directories(
+#		SYSTEM
+#		${GLUT_INCLUDE_DIR}
+#	)
+#endif()
 
 ###########################################################################
 # GLEW
@@ -66,29 +66,29 @@ if(CYCLES_STANDALONE_REPOSITORY)
 	####
 	# OpenGL
 
-	# TODO(sergey): We currently re-use the same variable name as we use
-	# in Blender. Ideally we need to make it CYCLES_GL_LIBRARIES.
-	find_package(OpenGL REQUIRED)
-	find_package(GLEW REQUIRED)
-	list(APPEND BLENDER_GL_LIBRARIES
-		"${OPENGL_gl_LIBRARY}"
-		"${OPENGL_glu_LIBRARY}"
-		"${GLEW_LIBRARY}"
-	)
+	# # TODO(sergey): We currently re-use the same variable name as we use
+	# # in Blender. Ideally we need to make it CYCLES_GL_LIBRARIES.
+	# find_package(OpenGL REQUIRED)
+	# find_package(GLEW REQUIRED)
+	# list(APPEND BLENDER_GL_LIBRARIES
+	# 	"${OPENGL_gl_LIBRARY}"
+	# 	"${OPENGL_glu_LIBRARY}"
+	# 	"${GLEW_LIBRARY}"
+	# )
 
 	####
 	# OpenImageIO
-	find_package(OpenImageIO REQUIRED)
-	if(OPENIMAGEIO_PUGIXML_FOUND)
-		set(PUGIXML_INCLUDE_DIR "${OPENIMAGEIO_INCLUDE_DIR/OpenImageIO}")
-		set(PUGIXML_LIBRARIES "")
-	else()
-		find_package(PugiXML REQUIRED)
-	endif()
+	#find_package(OpenImageIO REQUIRED)
+	#if(OPENIMAGEIO_PUGIXML_FOUND)
+	#	set(PUGIXML_INCLUDE_DIR "${OPENIMAGEIO_INCLUDE_DIR/OpenImageIO}")
+	#	set(PUGIXML_LIBRARIES "")
+	#else()
+	#	find_package(PugiXML REQUIRED)
+	#endif()
 
 	# OIIO usually depends on OpenEXR, so find this library
 	# but don't make it required.
-	find_package(OpenEXR)
+	#find_package(OpenEXR)
 
 	####
 	# OpenShadingLanguage
@@ -105,32 +105,32 @@ if(CYCLES_STANDALONE_REPOSITORY)
 
 	####
 	# Boost
-	set(__boost_packages filesystem regex system thread date_time)
-	if(WITH_CYCLES_NETWORK)
-		list(APPEND __boost_packages serialization)
-	endif()
-	if(WITH_CYCLES_OSL)
-		# TODO(sergey): This is because of the way how our precompiled
-		# libraries works, could be different for someone's else libs..
-		if(APPLE OR MSVC)
-			list(APPEND __boost_packages wave)
-		elseif(NOT (${OSL_LIBRARY_VERSION_MAJOR} EQUAL "1" AND ${OSL_LIBRARY_VERSION_MINOR} LESS "6"))
-			list(APPEND __boost_packages wave)
-		endif()
-	endif()
-	find_package(Boost 1.48 COMPONENTS ${__boost_packages} REQUIRED)
-	if(NOT Boost_FOUND)
-		# Try to find non-multithreaded if -mt not found, this flag
-		# doesn't matter for us, it has nothing to do with thread
-		# safety, but keep it to not disturb build setups.
-		set(Boost_USE_MULTITHREADED OFF)
-		find_package(Boost 1.48 COMPONENTS ${__boost_packages})
-	endif()
-	unset(__boost_packages)
-	set(BOOST_INCLUDE_DIR ${Boost_INCLUDE_DIRS})
-	set(BOOST_LIBRARIES ${Boost_LIBRARIES})
-	set(BOOST_LIBPATH ${Boost_LIBRARY_DIRS})
-	set(BOOST_DEFINITIONS "-DBOOST_ALL_NO_LIB")
+	#set(__boost_packages filesystem regex system thread date_time)
+	#if(WITH_CYCLES_NETWORK)
+	#	list(APPEND __boost_packages serialization)
+	#endif()
+	#if(WITH_CYCLES_OSL)
+	#	# TODO(sergey): This is because of the way how our precompiled
+	#	# libraries works, could be different for someone's else libs..
+	#	if(APPLE OR MSVC)
+	#		list(APPEND __boost_packages wave)
+	#	elseif(NOT (${OSL_LIBRARY_VERSION_MAJOR} EQUAL "1" AND ${OSL_LIBRARY_VERSION_MINOR} LESS "6"))
+	#		list(APPEND __boost_packages wave)
+	#	endif()
+	#endif()
+	#find_package(Boost 1.48 COMPONENTS ${__boost_packages} REQUIRED)
+	#if(NOT Boost_FOUND)
+	#	# Try to find non-multithreaded if -mt not found, this flag
+	#	# doesn't matter for us, it has nothing to do with thread
+	#	# safety, but keep it to not disturb build setups.
+	#	set(Boost_USE_MULTITHREADED OFF)
+	#	find_package(Boost 1.48 COMPONENTS ${__boost_packages})
+	#endif()
+	#unset(__boost_packages)
+	#set(BOOST_INCLUDE_DIR ${Boost_INCLUDE_DIRS})
+	#set(BOOST_LIBRARIES ${Boost_LIBRARIES})
+	#set(BOOST_LIBPATH ${Boost_LIBRARY_DIRS})
+	#set(BOOST_DEFINITIONS "-DBOOST_ALL_NO_LIB")
 
 	####
 	# Logging

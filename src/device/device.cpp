@@ -24,7 +24,9 @@
 #include "util/util_half.h"
 #include "util/util_logging.h"
 #include "util/util_math.h"
+#if !defined(__ANDROID__)
 #include "util/util_opengl.h"
+#endif
 #include "util/util_time.h"
 #include "util/util_system.h"
 #include "util/util_types.h"
@@ -78,14 +80,17 @@ std::ostream& operator <<(std::ostream &os,
 
 Device::~Device()
 {
+#if !defined(__ANDROID__)
 	if(!background && vertex_buffer != 0) {
 		glDeleteBuffers(1, &vertex_buffer);
 	}
+#endif
 }
 
 void Device::draw_pixels(device_memory& rgba, int y, int w, int h, int dx, int dy, int width, int height, bool transparent,
 	const DeviceDrawParams &draw_params)
 {
+#if !defined(__ANDROID__)
 	assert(rgba.type == MEM_PIXELS);
 
 	mem_copy_from(rgba, y, w, h, rgba.memory_elements_size(1));
@@ -204,6 +209,7 @@ void Device::draw_pixels(device_memory& rgba, int y, int w, int h, int dx, int d
 
 	if(transparent)
 		glDisable(GL_BLEND);
+#endif
 }
 
 Device *Device::create(DeviceInfo& info, Stats &stats, bool background)

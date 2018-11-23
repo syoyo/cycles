@@ -32,7 +32,9 @@
 #include "util/util_function.h"
 #include "util/util_logging.h"
 #include "util/util_math.h"
+#if !defined(__ANDROID__)
 #include "util/util_opengl.h"
+#endif
 #include "util/util_task.h"
 #include "util/util_time.h"
 

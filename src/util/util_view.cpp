@@ -25,7 +25,7 @@
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
-#else
+#elif !defined(__ANDROID__)
 #include <GL/glut.h>
 #endif
 
@@ -54,16 +54,19 @@ struct View {
 
 static void view_display_text(int x, int y, const char *text)
 {
+#if !defined(__ANDROID__)
 	const char *c;
 
 	glRasterPos3f(x, y, 0);
 
 	for(c = text; *c != '\0'; c++)
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *c);
+#endif
 }
 
 void view_display_info(const char *info)
 {
+#if !defined(__ANDROID__)
 	const int height = 20;
 
 	glEnable(GL_BLEND);
@@ -77,10 +80,12 @@ void view_display_info(const char *info)
 	view_display_text(10, 7 + V.height - height, info);
 
 	glColor3f(1.0f, 1.0f, 1.0f);
+#endif
 }
 
 void view_display_help()
 {
+#if !defined(__ANDROID__)
 	const int w = (int)((float)V.width  / 1.15f);
 	const int h = (int)((float)V.height / 1.15f);
 
@@ -116,10 +121,12 @@ void view_display_help()
 	view_display_text(x1+20, y2-290, "0/1/2/3:  Set max bounces");
 
 	glColor3f(1.0f, 1.0f, 1.0f);
+#endif
 }
 
 static void view_display()
 {
+#if !defined(__ANDROID__)
 	if(V.first_display) {
 		if(V.initf) V.initf();
 		if(V.exitf) atexit(V.exitf);
@@ -143,10 +150,12 @@ static void view_display()
 		V.display();
 
 	glutSwapBuffers();
+#endif
 }
 
 static void view_reshape(int width, int height)
 {
+#if !defined(__ANDROID__)
 	if(width <= 0 || height <= 0)
 		return;
 
@@ -163,10 +172,12 @@ static void view_reshape(int width, int height)
 
 	if(V.resize)
 		V.resize(width, height);
+#endif
 }
 
 static void view_keyboard(unsigned char key, int x, int y)
 {
+#if !defined(__ANDROID__)
 	if(V.keyboard)
 		V.keyboard(key);
 
@@ -176,10 +187,12 @@ static void view_keyboard(unsigned char key, int x, int y)
 		if(V.exitf) V.exitf();
 		exit(0);
 	}
+#endif
 }
 
 static void view_mouse(int button, int state, int x, int y)
 {
+#if !defined(__ANDROID__)
 	if(button == 0) {
 		if(state == GLUT_DOWN) {
 			V.mouseX = x;
@@ -200,10 +213,12 @@ static void view_mouse(int button, int state, int x, int y)
 			V.mouseBut2 = 0;
 		}
 	}
+#endif
 }
 
 static void view_motion(int x, int y)
 {
+#if !defined(__ANDROID__)
 	const int but = V.mouseBut0? 0:2;
 	const int distX = x - V.mouseX;
 	const int distY = y - V.mouseY;
@@ -213,16 +228,19 @@ static void view_motion(int x, int y)
 
 	V.mouseX = x;
 	V.mouseY = y;
+#endif
 }
 
 static void view_idle(void)
 {
+#if !defined(__ANDROID__)
 	if(V.redraw) {
 		V.redraw = false;
 		glutPostRedisplay();
 	}
 
 	time_sleep(0.1);
+#endif
 }
 
 void view_main_loop(const char *title, int width, int height,
@@ -230,6 +248,7 @@ void view_main_loop(const char *title, int width, int height,
 	ViewResizeFunc resize, ViewDisplayFunc display,
 	ViewKeyboardFunc keyboard, ViewMotionFunc motion)
 {
+#if !defined(__ANDROID__)
 	const char *name = "app";
 	char *argv = (char*)name;
 	int argc = 1;
@@ -264,6 +283,7 @@ void view_main_loop(const char *title, int width, int height,
 	glutMotionFunc(view_motion);
 
 	glutMainLoop();
+#endif
 }
 
 void view_redraw()

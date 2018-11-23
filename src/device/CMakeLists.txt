@@ -24,11 +24,11 @@ endif()
 set(SRC
 	device.cpp
 	device_cpu.cpp
-	device_cuda.cpp
+	#device_cuda.cpp
 	device_denoising.cpp
 	device_memory.cpp
 	device_multi.cpp
-	device_opencl.cpp
+	#device_opencl.cpp
 	device_split_kernel.cpp
 	device_task.cpp
 )

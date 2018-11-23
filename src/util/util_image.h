@@ -19,7 +19,9 @@
 
 /* OpenImageIO is used for all image file reading and writing. */
 
-#include <OpenImageIO/imageio.h>
+//#include <OpenImageIO/imageio.h>
+#include "util/android/OpenImageIO/oiioversion.h"
+#include "util/android/OpenImageIO/typedesc.h"
 
 #include "util/util_vector.h"
 

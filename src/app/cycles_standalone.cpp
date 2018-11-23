@@ -23,7 +23,7 @@
 #include "render/session.h"
 #include "render/integrator.h"
 
-#include "util/util_args.h"
+//#include "util/util_args.h"
 #include "util/util_foreach.h"
 #include "util/util_function.h"
 #include "util/util_logging.h"
@@ -89,6 +89,9 @@ static void session_print_status()
 
 static bool write_render(const uchar *pixels, int w, int h, int channels)
 {
+#if defined(__ANDROID__)
+    return false;
+#else
 	string msg = string_printf("Writing image %s", options.output_path.c_str());
 	session_print(msg);
 
@@ -113,6 +116,7 @@ static bool write_render(const uchar *pixels, int w, int h, int channels)
 	delete out;
 
 	return true;
+#endif
 }
 
 static BufferParams& session_buffer_params()
@@ -380,6 +384,7 @@ static void options_parse(int argc, const char **argv)
 	/* shading system */
 	string ssname = "svm";
 
+#if !defined(__ANDROID__)
 	/* parse options */
 	ArgParse ap;
 	bool help = false, debug = false, version = false;
@@ -490,6 +495,7 @@ static void options_parse(int argc, const char **argv)
 		fprintf(stderr, "No file path specified\n");
 		exit(EXIT_FAILURE);
 	}
+#endif
 
 	/* For smoother Viewport */
 	options.session_params.start_resolution = 64;

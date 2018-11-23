@@ -17,6 +17,7 @@
 #ifndef __UTIL_OPENGL_H__
 #define __UTIL_OPENGL_H__
 
+#if !defined(__ANDROID__)
 /* OpenGL header includes, used everywhere we use OpenGL, to deal with
  * platform differences in one central place. */
 
@@ -26,6 +27,8 @@
 #  include <GL/glew.h>
 #  define mxCreateContext() glewInit()
 #  define mxMakeCurrentContext(x) (x)
+#endif
+
 #endif
 
 #endif /* __UTIL_OPENGL_H__ */

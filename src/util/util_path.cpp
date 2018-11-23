@@ -18,9 +18,13 @@
 #include "util/util_path.h"
 #include "util/util_string.h"
 
+#if defined(__ANDROID__)
+#include "util/android/OpenImageIO/oiioversion.h"
+#else
 #include <OpenImageIO/filesystem.h>
 #include <OpenImageIO/strutil.h>
 #include <OpenImageIO/sysutil.h>
+#endif
 
 OIIO_NAMESPACE_USING
 
@@ -372,16 +376,20 @@ string path_get(const string& sub)
 	if(special != NULL)
 		return special;
 
+#if !defined(__ANDROID__)
 	if(cached_path == "")
 		cached_path = path_dirname(Sysutil::this_program_path());
+#endif
 
 	return path_join(cached_path, sub);
 }
 
 string path_user_get(const string& sub)
 {
+#if !defined(__ANDROID__)
 	if(cached_user_path == "")
 		cached_user_path = path_dirname(Sysutil::this_program_path());
+#endif
 
 	return path_join(cached_user_path, sub);
 }

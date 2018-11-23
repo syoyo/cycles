@@ -20,9 +20,27 @@
 /* Parameter value lists from OpenImageIO are used to store custom properties
  * on various data, which can then later be used in shaders. */
 
+#if defined(__ANDROID__)
+//typedef std::string ustring;
+//
+//// C++11 has std::hash 
+//class ustringHash {
+// public:
+//  size_t operator()(const ustring& s) const {
+//    std::hash<std::string> hash_fn;
+//    return hash_fn(s);
+//  }
+//};
+
+#include "android/OpenImageIO/paramlist.h"
+#include "android/OpenImageIO/typedesc.h"
+#include "android/OpenImageIO/ustring.h"
+
+#else
 #include <OpenImageIO/paramlist.h>
 #include <OpenImageIO/typedesc.h>
 #include <OpenImageIO/ustring.h>
+#endif
 
 CCL_NAMESPACE_BEGIN
 

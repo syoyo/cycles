@@ -141,8 +141,10 @@ private:
 	vector<Image*> images[IMAGE_DATA_NUM_TYPES];
 	void *osl_texture_system;
 
+#if 0
 	bool file_load_image_generic(Image *img,
 	                             ImageInput **in);
+#endif
 
 	template<TypeDesc::BASETYPE FileFormat,
 	         typename StorageType,

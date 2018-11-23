@@ -194,6 +194,7 @@ bool ImageManager::get_image_metadata(const string& filename,
 		return false;
 	}
 
+#if !defined(__ANDROID__)
 	ImageInput *in = ImageInput::create(filename);
 
 	if(!in) {
@@ -273,6 +274,9 @@ bool ImageManager::get_image_metadata(const string& filename,
 	delete in;
 
 	return true;
+#else
+    return false;
+#endif
 }
 
 static bool image_equals(ImageManager::Image *image,
@@ -454,6 +458,7 @@ void ImageManager::tag_reload_image(const string& filename,
 	}
 }
 
+#if !defined(__ANDROID__)
 bool ImageManager::file_load_image_generic(Image *img,
                                            ImageInput **in)
 {
@@ -714,6 +719,7 @@ bool ImageManager::file_load_image(Image *img,
 	}
 	return true;
 }
+#endif
 
 void ImageManager::device_load_image(Device *device,
                                      Scene *scene,
