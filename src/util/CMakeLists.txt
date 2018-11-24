@@ -24,6 +24,10 @@ set(SRC
 	util_time.cpp
 	util_transform.cpp
 	util_windows.cpp
+	android/OpenImageIO/ustring.cpp
+	android/OpenImageIO/typedesc.cpp
+	android/OpenImageIO/strutil.cpp
+	android/OpenImageIO/paramlist.cpp
 )
 
 if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)

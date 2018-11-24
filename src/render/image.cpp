@@ -727,6 +727,10 @@ void ImageManager::device_load_image(Device *device,
                                      int slot,
                                      Progress *progress)
 {
+#if defined(__aarch64__)
+  // TODO(syoyo): Implement
+  return;
+#else
 	if(progress->get_cancel())
 		return;
 
@@ -945,6 +949,7 @@ void ImageManager::device_load_image(Device *device,
 		tex_img->copy_to_device();
 	}
 	img->need_load = false;
+#endif
 }
 
 void ImageManager::device_free_image(Device *, ImageDataType type, int slot)

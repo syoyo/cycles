@@ -191,7 +191,10 @@ std::string OIIO_API wordwrap (string_view src, int columns=80, int prefix=0);
 inline size_t
 strhash (string_view s)
 {
-    return s.length() ? farmhash::Hash (s) : 0;
+    std::hash<std::string> hash_fn;
+
+    //return s.length() ? farmhash::Hash (s) : 0;
+    return s.length() ? hash_fn(s) : 0;
 }
 
 

@@ -218,6 +218,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 		case DEVICE_CPU:
 			device = device_cpu_create(info, stats, background);
 			break;
+#if !defined(__aarch64__)
 #ifdef WITH_CUDA
 		case DEVICE_CUDA:
 			if(device_cuda_init())
@@ -225,6 +226,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 			else
 				device = NULL;
 			break;
+#endif
 #endif
 #ifdef WITH_MULTI
 		case DEVICE_MULTI:
@@ -236,6 +238,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 			device = device_network_create(info, stats, "127.0.0.1");
 			break;
 #endif
+#if !defined(__aarch64__)
 #ifdef WITH_OPENCL
 		case DEVICE_OPENCL:
 			if(device_opencl_init())
@@ -243,6 +246,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 			else
 				device = NULL;
 			break;
+#endif
 #endif
 		default:
 			return NULL;
@@ -289,6 +293,7 @@ vector<DeviceType>& Device::available_types()
 	if(need_types_update) {
 		types.clear();
 		types.push_back(DEVICE_CPU);
+#if !defined(__aarch64__)
 #ifdef WITH_CUDA
 		if(device_cuda_init()) {
 			types.push_back(DEVICE_CUDA);
@@ -298,6 +303,7 @@ vector<DeviceType>& Device::available_types()
 		if(device_opencl_init()) {
 			types.push_back(DEVICE_OPENCL);
 		}
+#endif
 #endif
 #ifdef WITH_NETWORK
 		types.push_back(DEVICE_NETWORK);
@@ -312,6 +318,7 @@ vector<DeviceInfo>& Device::available_devices()
 	thread_scoped_lock lock(device_mutex);
 	if(need_devices_update) {
 		devices.clear();
+#if !defined(__aarch64__)
 #ifdef WITH_OPENCL
 		if(device_opencl_init()) {
 			device_opencl_info(devices);
@@ -321,6 +328,7 @@ vector<DeviceInfo>& Device::available_devices()
 		if(device_cuda_init()) {
 			device_cuda_info(devices);
 		}
+#endif
 #endif
 		device_cpu_info(devices);
 #ifdef WITH_NETWORK
@@ -336,18 +344,22 @@ string Device::device_capabilities()
 	string capabilities = "CPU device capabilities: ";
 	capabilities += device_cpu_capabilities() + "\n";
 
+#if !defined(__aarch64__)
 #ifdef WITH_OPENCL
 	if(device_opencl_init()) {
 		capabilities += "\nOpenCL device capabilities:\n";
 		capabilities += device_opencl_capabilities();
 	}
 #endif
+#endif
 
+#if !defined(__aarch64__)
 #ifdef WITH_CUDA
 	if(device_cuda_init()) {
 		capabilities += "\nCUDA device capabilities:\n";
 		capabilities += device_cuda_capabilities();
 	}
+#endif
 #endif
 
 	return capabilities;
