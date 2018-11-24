@@ -28,6 +28,9 @@ CCL_NAMESPACE_BEGIN
 void util_logging_init(const char *argv0)
 {
 #ifdef WITH_CYCLES_LOGGING
+#if defined(__aarch64__)
+	google::InitGoogleLogging(const_cast<char*>(argv0));
+#else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;
 
 	/* Make it so ERROR messages are always print into console. */
@@ -40,6 +43,7 @@ void util_logging_init(const char *argv0)
 	SetCommandLineOption("v", "0");
 	SetCommandLineOption("stderrthreshold", severity_fatal);
 	SetCommandLineOption("minloglevel", severity_fatal);
+#endif
 #else
 	(void) argv0;
 #endif
@@ -48,21 +52,28 @@ void util_logging_init(const char *argv0)
 void util_logging_start(void)
 {
 #ifdef WITH_CYCLES_LOGGING
+#if defined(__aarch64__)
+#else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;
 	SetCommandLineOption("logtostderr", "1");
 	SetCommandLineOption("v", "2");
 	SetCommandLineOption("stderrthreshold", "1");
 	SetCommandLineOption("minloglevel", "0");
 #endif
+#endif
 }
 
 void util_logging_verbosity_set(int verbosity)
 {
 #ifdef WITH_CYCLES_LOGGING
+#if defined(__aarch64__)
+	(void) verbosity;
+#else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;
 	char val[10];
 	snprintf(val, sizeof(val), "%d", verbosity);
 	SetCommandLineOption("v", val);
+#endif
 #else
 	(void) verbosity;
 #endif

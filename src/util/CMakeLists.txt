@@ -31,6 +31,12 @@ set(SRC
 	android/OpenImageIO/argparse.cpp
 )
 
+if(WITH_CYCLES_LOGGING)
+	list(APPEND SRC
+		${CMAKE_SOURCE_DIR}/third_party/miniglog/glog/logging.cc
+	)
+endif()
+
 if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)
 	list(APPEND SRC
 		util_view.cpp

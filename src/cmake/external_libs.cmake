@@ -135,8 +135,8 @@ if(CYCLES_STANDALONE_REPOSITORY)
 	####
 	# Logging
 	if(WITH_CYCLES_LOGGING)
-		find_package(Glog REQUIRED)
-		find_package(Gflags REQUIRED)
+		#find_package(Glog REQUIRED)
+		#find_package(Gflags REQUIRED)
 	endif()
 
 	####

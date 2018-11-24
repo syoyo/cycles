@@ -76,7 +76,7 @@ set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS_RELWITHDEBINFO  NDEBU
 # Options.
 
 option(WITH_CPU_SSE                "Enable SIMD instruction if they're detected on the host machine" ON)
-option(WITH_CYCLES_STANDALONE_GUI  "Build Cycles standalone with GUI" ON)
+option(WITH_CYCLES_STANDALONE_GUI  "Build Cycles standalone with GUI" OFF)
 option(WITH_CYCLES_OSL             "Build Cycles with OSL support" OFF)
 option(WITH_CYCLES_OPENSUBDIV      "Build Cycles with OpenSubdiv support" OFF)
 option(WITH_CYCLES_LOGGING         "Build Cycles with logging support" OFF)
@@ -101,6 +101,7 @@ include_directories(
 	third_party/cuew/include
 	third_party/clew/include
 	third_party/pugixml/
+	third_party/miniglog/
 )
 
 ###########################################################################
