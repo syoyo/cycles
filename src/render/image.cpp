@@ -194,7 +194,7 @@ bool ImageManager::get_image_metadata(const string& filename,
 		return false;
 	}
 
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	ImageInput *in = ImageInput::create(filename);
 
 	if(!in) {
@@ -458,7 +458,7 @@ void ImageManager::tag_reload_image(const string& filename,
 	}
 }
 
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 bool ImageManager::file_load_image_generic(Image *img,
                                            ImageInput **in)
 {

@@ -4656,7 +4656,7 @@ PUGI__NS_BEGIN
 	PUGI__FN bool set_value_convert(String& dest, Header& header, uintptr_t header_mask, float value)
 	{
 		char buf[128];
-		PUGI__SNPRINTF(buf, "%.9g", value);
+		PUGI__SNPRINTF(buf, "%.9g", double(value));
 
 		return set_value_ascii(dest, header, header_mask, buf);
 	}

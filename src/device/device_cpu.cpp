@@ -47,9 +47,7 @@
 #include "util/util_function.h"
 #include "util/util_logging.h"
 #include "util/util_map.h"
-#if !defined(__ANDROID__)
 #include "util/util_opengl.h"
-#endif
 #include "util/util_optimization.h"
 #include "util/util_progress.h"
 #include "util/util_system.h"

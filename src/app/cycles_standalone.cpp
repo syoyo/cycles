@@ -89,7 +89,7 @@ static void session_print_status()
 
 static bool write_render(const uchar *pixels, int w, int h, int channels)
 {
-#if defined(__ANDROID__)
+#if defined(__aarch64__)
     return false;
 #else
 	string msg = string_printf("Writing image %s", options.output_path.c_str());
@@ -384,7 +384,7 @@ static void options_parse(int argc, const char **argv)
 	/* shading system */
 	string ssname = "svm";
 
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	/* parse options */
 	ArgParse ap;
 	bool help = false, debug = false, version = false;

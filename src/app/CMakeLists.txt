@@ -102,6 +102,7 @@ if(WITH_CYCLES_STANDALONE)
 		cycles_standalone.cpp
 		cycles_xml.cpp
 		cycles_xml.h
+		${CMAKE_SOURCE_DIR}/third_party/pugixml/pugixml.cpp
 	)
 	add_executable(cycles ${SRC})
 	cycles_target_link_libraries(cycles)

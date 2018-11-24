@@ -25,7 +25,7 @@
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
-#elif !defined(__ANDROID__)
+#elif !defined(__aarch64__)
 #include <GL/glut.h>
 #endif
 
@@ -54,7 +54,7 @@ struct View {
 
 static void view_display_text(int x, int y, const char *text)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	const char *c;
 
 	glRasterPos3f(x, y, 0);
@@ -66,7 +66,7 @@ static void view_display_text(int x, int y, const char *text)
 
 void view_display_info(const char *info)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	const int height = 20;
 
 	glEnable(GL_BLEND);
@@ -85,7 +85,7 @@ void view_display_info(const char *info)
 
 void view_display_help()
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	const int w = (int)((float)V.width  / 1.15f);
 	const int h = (int)((float)V.height / 1.15f);
 
@@ -126,7 +126,7 @@ void view_display_help()
 
 static void view_display()
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	if(V.first_display) {
 		if(V.initf) V.initf();
 		if(V.exitf) atexit(V.exitf);
@@ -155,7 +155,7 @@ static void view_display()
 
 static void view_reshape(int width, int height)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	if(width <= 0 || height <= 0)
 		return;
 
@@ -177,7 +177,7 @@ static void view_reshape(int width, int height)
 
 static void view_keyboard(unsigned char key, int x, int y)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	if(V.keyboard)
 		V.keyboard(key);
 
@@ -192,7 +192,7 @@ static void view_keyboard(unsigned char key, int x, int y)
 
 static void view_mouse(int button, int state, int x, int y)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	if(button == 0) {
 		if(state == GLUT_DOWN) {
 			V.mouseX = x;
@@ -218,7 +218,7 @@ static void view_mouse(int button, int state, int x, int y)
 
 static void view_motion(int x, int y)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	const int but = V.mouseBut0? 0:2;
 	const int distX = x - V.mouseX;
 	const int distY = y - V.mouseY;
@@ -233,7 +233,7 @@ static void view_motion(int x, int y)
 
 static void view_idle(void)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	if(V.redraw) {
 		V.redraw = false;
 		glutPostRedisplay();
@@ -248,7 +248,7 @@ void view_main_loop(const char *title, int width, int height,
 	ViewResizeFunc resize, ViewDisplayFunc display,
 	ViewKeyboardFunc keyboard, ViewMotionFunc motion)
 {
-#if !defined(__ANDROID__)
+#if !defined(__aarch64__)
 	const char *name = "app";
 	char *argv = (char*)name;
 	int argc = 1;
