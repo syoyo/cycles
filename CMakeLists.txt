@@ -56,6 +56,8 @@ include("${PROJECT_SOURCE_DIR}/src/cmake/macros.cmake")
 # Avoid having empty buildtype.
 set(CMAKE_BUILD_TYPE_INIT "Release")
 
+# CXX11
+set(CMAKE_CXX_STANDARD 11)
 
 # Some stuff is different when building stabdalone Cycles from inside
 # Blender source code and when building it from it's own repository.
