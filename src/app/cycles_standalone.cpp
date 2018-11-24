@@ -23,7 +23,7 @@
 #include "render/session.h"
 #include "render/integrator.h"
 
-//#include "util/util_args.h"
+#include "util/util_args.h"
 #include "util/util_foreach.h"
 #include "util/util_function.h"
 #include "util/util_logging.h"
@@ -384,7 +384,6 @@ static void options_parse(int argc, const char **argv)
 	/* shading system */
 	string ssname = "svm";
 
-#if !defined(__aarch64__)
 	/* parse options */
 	ArgParse ap;
 	bool help = false, debug = false, version = false;
@@ -495,7 +494,6 @@ static void options_parse(int argc, const char **argv)
 		fprintf(stderr, "No file path specified\n");
 		exit(EXIT_FAILURE);
 	}
-#endif
 
 	/* For smoother Viewport */
 	options.session_params.start_resolution = 64;

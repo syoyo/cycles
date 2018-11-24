@@ -28,6 +28,7 @@ set(SRC
 	android/OpenImageIO/typedesc.cpp
 	android/OpenImageIO/strutil.cpp
 	android/OpenImageIO/paramlist.cpp
+	android/OpenImageIO/argparse.cpp
 )
 
 if(WITH_CYCLES_STANDALONE AND WITH_CYCLES_STANDALONE_GUI)
