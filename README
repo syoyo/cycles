@@ -1,5 +1,14 @@
-Cycles Render Engine
-====================
+Cycles Render Engine for AARCH64 port(Android, Raspberry Pi3, etc)
+==================================================================
+
+= Status =
+----------
+
+- [x] Raspberry Pi3 + AARCH64 kernel
+- [ ] Android
+- [ ] Implement image load/save feature
+- [ ] Implement some string fuctions of OpenImageIO part
+- [ ] Refactor __aarch64__ ifdef
 
 Cycles is a ray tracing renderer focused on interactivity and ease of use, while
 still supporting many production features.
