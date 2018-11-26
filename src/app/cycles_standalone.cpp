@@ -40,7 +40,7 @@
 
 #include "app/cycles_xml.h"
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 // TODO(syoyo): Implement ImageOutput
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
@@ -98,7 +98,7 @@ static bool write_render(const uchar *pixels, int w, int h, int channels)
 	string msg = string_printf("Writing image %s", options.output_path.c_str());
 	session_print(msg);
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
   int n = stbi_write_png(options.output_path.c_str(), w, h, channels, pixels, w * channels);
   return (n > 0);
 #else

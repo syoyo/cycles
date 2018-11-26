@@ -17,6 +17,7 @@ $CMAKE_BIN -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchai
   -DANDROID_ARM_MODE=arm \
   -DANDROID_ARM_NEON=TRUE \
   -DANDROID_STL=c++_shared \
+  -WITH_CYCLES_MINDEP=On \
   -WITH_CYCLES_STANDALONE_GUI=Off \
   -WITH_CPU_SSE=Off \
   -Bbuild-android -H.

@@ -18,7 +18,7 @@
 #define __UTIL_LOGGING_H__
 
 #if defined(WITH_CYCLES_LOGGING) && !defined(__KERNEL_GPU__)
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #  include "glog/logging.h" // third_party/miniglog
 
 #define DFATAL FATAL

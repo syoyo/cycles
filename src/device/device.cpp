@@ -78,7 +78,7 @@ std::ostream& operator <<(std::ostream &os,
 
 Device::~Device()
 {
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 	if(!background && vertex_buffer != 0) {
 		glDeleteBuffers(1, &vertex_buffer);
 	}
@@ -88,7 +88,7 @@ Device::~Device()
 void Device::draw_pixels(device_memory& rgba, int y, int w, int h, int dx, int dy, int width, int height, bool transparent,
 	const DeviceDrawParams &draw_params)
 {
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 	assert(rgba.type == MEM_PIXELS);
 
 	mem_copy_from(rgba, y, w, h, rgba.memory_elements_size(1));
@@ -218,7 +218,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 		case DEVICE_CPU:
 			device = device_cpu_create(info, stats, background);
 			break;
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_CUDA
 		case DEVICE_CUDA:
 			if(device_cuda_init())
@@ -238,7 +238,7 @@ Device *Device::create(DeviceInfo& info, Stats &stats, bool background)
 			device = device_network_create(info, stats, "127.0.0.1");
 			break;
 #endif
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_OPENCL
 		case DEVICE_OPENCL:
 			if(device_opencl_init())
@@ -293,7 +293,7 @@ vector<DeviceType>& Device::available_types()
 	if(need_types_update) {
 		types.clear();
 		types.push_back(DEVICE_CPU);
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_CUDA
 		if(device_cuda_init()) {
 			types.push_back(DEVICE_CUDA);
@@ -318,7 +318,7 @@ vector<DeviceInfo>& Device::available_devices()
 	thread_scoped_lock lock(device_mutex);
 	if(need_devices_update) {
 		devices.clear();
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_OPENCL
 		if(device_opencl_init()) {
 			device_opencl_info(devices);
@@ -344,7 +344,7 @@ string Device::device_capabilities()
 	string capabilities = "CPU device capabilities: ";
 	capabilities += device_cpu_capabilities() + "\n";
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_OPENCL
 	if(device_opencl_init()) {
 		capabilities += "\nOpenCL device capabilities:\n";
@@ -353,7 +353,7 @@ string Device::device_capabilities()
 #endif
 #endif
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 #ifdef WITH_CUDA
 	if(device_cuda_init()) {
 		capabilities += "\nCUDA device capabilities:\n";

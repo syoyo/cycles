@@ -28,7 +28,7 @@ CCL_NAMESPACE_BEGIN
 void util_logging_init(const char *argv0)
 {
 #ifdef WITH_CYCLES_LOGGING
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 	google::InitGoogleLogging(const_cast<char*>(argv0));
 #else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;
@@ -52,7 +52,7 @@ void util_logging_init(const char *argv0)
 void util_logging_start(void)
 {
 #ifdef WITH_CYCLES_LOGGING
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;
 	SetCommandLineOption("logtostderr", "1");
@@ -66,7 +66,7 @@ void util_logging_start(void)
 void util_logging_verbosity_set(int verbosity)
 {
 #ifdef WITH_CYCLES_LOGGING
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 	(void) verbosity;
 #else
 	using CYCLES_GFLAGS_NAMESPACE::SetCommandLineOption;

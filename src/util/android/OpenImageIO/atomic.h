@@ -39,7 +39,7 @@
 #ifndef OPENIMAGEIO_ATOMIC_H
 #define OPENIMAGEIO_ATOMIC_H
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/oiioversion.h"
 #include "util/android/OpenImageIO/platform.h"
 #else

@@ -16,6 +16,8 @@ still supporting many production features.
 = Building =
 ------------
 
+Please pass `WITH_CYCLES_MINDEP=On` to cmake flags.
+
 == Requirements ==
 -------------------
 

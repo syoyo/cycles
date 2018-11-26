@@ -18,7 +18,7 @@
 #include "util/util_path.h"
 #include "util/util_string.h"
 
-#if defined(__ANDROID__) || defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/oiioversion.h"
 #else
 #include <OpenImageIO/filesystem.h>
@@ -376,7 +376,7 @@ string path_get(const string& sub)
 	if(special != NULL)
 		return special;
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 	if(cached_path == "")
 		cached_path = path_dirname(Sysutil::this_program_path());
 #endif
@@ -386,7 +386,7 @@ string path_get(const string& sub)
 
 string path_user_get(const string& sub)
 {
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 	if(cached_user_path == "")
 		cached_user_path = path_dirname(Sysutil::this_program_path());
 #endif

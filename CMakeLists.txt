@@ -76,6 +76,7 @@ set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS_RELWITHDEBINFO  NDEBU
 # Options.
 
 option(WITH_CPU_SSE                "Enable SIMD instruction if they're detected on the host machine" ON)
+option(WITH_CYCLES_MINDEP          "Build Cycles with minimal dependency" ON)
 option(WITH_CYCLES_STANDALONE_GUI  "Build Cycles standalone with GUI" OFF)
 option(WITH_CYCLES_OSL             "Build Cycles with OSL support" OFF)
 option(WITH_CYCLES_OPENSUBDIV      "Build Cycles with OpenSubdiv support" OFF)

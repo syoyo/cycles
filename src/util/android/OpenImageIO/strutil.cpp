@@ -43,7 +43,7 @@
 #include <xlocale.h>
 #endif
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/platform.h"
 #include "util/android/OpenImageIO/dassert.h"
 #include "util/android/OpenImageIO/strutil.h"
@@ -573,7 +573,7 @@ Strutil::split (string_view str, std::vector<string_view> &result,
 
 
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 std::string
 Strutil::join (const std::vector<string_view> &seq, string_view str)
 {

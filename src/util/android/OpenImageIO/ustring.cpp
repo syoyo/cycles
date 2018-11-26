@@ -30,7 +30,7 @@
 
 #include <string>
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/export.h"
 #include "util/android/OpenImageIO/thread.h"
 #include "util/android/OpenImageIO/strutil.h"

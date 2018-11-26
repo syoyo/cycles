@@ -17,7 +17,7 @@
 #ifndef __UTIL_OPENGL_H__
 #define __UTIL_OPENGL_H__
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 /* OpenGL header includes, used everywhere we use OpenGL, to deal with
  * platform differences in one central place. */
 

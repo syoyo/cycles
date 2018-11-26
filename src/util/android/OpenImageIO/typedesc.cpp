@@ -33,7 +33,7 @@
 #include <cstdlib>
 #include <string>
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/dassert.h"
 #include "util/android/OpenImageIO/ustring.h"
 #include "util/android/OpenImageIO/strutil.h"

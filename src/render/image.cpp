@@ -194,7 +194,7 @@ bool ImageManager::get_image_metadata(const string& filename,
 		return false;
 	}
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 	ImageInput *in = ImageInput::create(filename);
 
 	if(!in) {
@@ -458,7 +458,7 @@ void ImageManager::tag_reload_image(const string& filename,
 	}
 }
 
-#if !defined(__aarch64__)
+#if !defined(WITH_CYCLES_MINDEP)
 bool ImageManager::file_load_image_generic(Image *img,
                                            ImageInput **in)
 {
@@ -727,7 +727,7 @@ void ImageManager::device_load_image(Device *device,
                                      int slot,
                                      Progress *progress)
 {
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
   // TODO(syoyo): Implement
   return;
 #else

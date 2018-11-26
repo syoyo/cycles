@@ -40,7 +40,7 @@
 #include <string>
 #include <sstream>
 
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 #include "util/android/OpenImageIO/strutil.h"
 //#include "util/android/OpenImageIO/sysutil.h"
 #include "util/android/OpenImageIO/argparse.h"
@@ -547,7 +547,7 @@ ArgParse::usage () const
     }
 
     // Try to figure out how wide the terminal is, so we can word wrap.
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
     int columns = 80;
 #else
     int columns = Sysutil::terminal_columns ();
@@ -578,7 +578,7 @@ ArgParse::briefusage () const
 {
     std::cout << m_impl->m_intro << '\n';
     // Try to figure out how wide the terminal is, so we can word wrap.
-#if defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
     int columns = 80;
 #else
     int columns = Sysutil::terminal_columns ();

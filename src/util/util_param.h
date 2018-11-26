@@ -20,7 +20,7 @@
 /* Parameter value lists from OpenImageIO are used to store custom properties
  * on various data, which can then later be used in shaders. */
 
-#if defined(__ANDROID__) || defined(__aarch64__)
+#if defined(WITH_CYCLES_MINDEP)
 //typedef std::string ustring;
 //
 //// C++11 has std::hash 
